@@ -38,7 +38,7 @@ class Image_Preload {
 	}
 
 	static function add_scripts() {
-		wp_enqueue_script( 'image-preload',  self::get_url( 'js/preload.js' ), self::version, true );
+		wp_enqueue_script( 'image-preload',  self::get_url( 'assets/js/preload.js' ), self::version, true );
 	}
 
 	static function add_image_placeholders( $content ) {
@@ -61,7 +61,7 @@ class Image_Preload {
 
 	static function process_image( $matches ) {
 		// In case you want to change the placeholder image
-		$placeholder_image = apply_filters( 'lazyload_images_placeholder_image', self::get_url( 'images/1x1.trans.gif' ) );
+		$placeholder_image = apply_filters( 'lazyload_images_placeholder_image', self::get_url( 'assets/images/1x1.trans.gif' ) );
 
 		$old_attributes_str = $matches[2];
 		$old_attributes = wp_kses_hair( $old_attributes_str, wp_allowed_protocols() );

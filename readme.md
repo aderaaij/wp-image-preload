@@ -23,6 +23,9 @@ img[data-loaded=true] {
 
 ## Credits
 This plugin is a straight up modification of the [WordPress LazyLoad plugin](https://nl.wordpress.org/plugins/lazy-load/), released under the GPL v2 license. 
-The lazyloading script is an adaption of [Lozad.js](https://github.com/ApoorvSaxena/lozad.js) by [Apoorv Saxena](https://apoorv.pro/).
+The lazyloading script is an adaption of [Lozad.js](https://github.com/ApoorvSaxena/lozad.js) by [Apoorv Saxena](https://apoorv.pro/), released under the MIT license. 
+
+## Licensing
+I have no idea. GPL v2? MIT? What's the standard if you include GPL and MIT software in your release? Feel free to make a pull request on the subject (or anything else)
 
 

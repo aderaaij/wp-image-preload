@@ -1,6 +1,6 @@
 # 📷 Image Preload
 An Image preloader / Lazy loader plugin to improve page load times. 
-Images will be loaded just before they're in the viewport. This uses [`Intersection Observerver`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to detect if an element is in the viewport. This is an 'experimental' technique and not yet available in every browser. There's an official polyfill available which is not (yet) included in the plugin. 
+Images will be loaded just before they're in the viewport. This uses [`Intersection Observerver`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to detect if an element is in the viewport. This is an 'experimental' technique and not yet available in every browser. There's an official polyfill available which you can load by going to `tools->Image Preload Settings` in the WP Admin menu. 
 
 The preloading will replace both `src` and `srcset` with `data-src` and `data-srcset` respectively. `src` will be replaced with a 1px gif. When an element is about to scroll into the viewport these are switched back again. 
 

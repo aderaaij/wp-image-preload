@@ -4,10 +4,10 @@ Images will be loaded just before they're in the viewport. This plugin makes use
 
 The preloading will replace both `src` and `srcset` with `data-src` and `data-srcset` respectively. `src` will be replaced with a 1px gif as placeholder. When an element is about to scroll into the viewport the `data` and normal attributes are switched back. 
 
-Each image is acoompanied by a `<noscript>` version so your site will still show images when Javascript is disabled.
+Each image is accompanied by a `<noscript>` version so your site will still show images when Javascript is disabled.
 
 ## 👷🏼‍Installation
-Download the `.zip` file. Install. That's it. No configuration yet. 
+Download the `.zip` file. Install. Maybe choose if you want that polyfill or not. 
 
 ## 💅🏼 Styling / Animation
 You can select the images in css with `img[data-src]`. When the images are loaded, a [data-loaded=true] is added which you can use to add a transition. For example:

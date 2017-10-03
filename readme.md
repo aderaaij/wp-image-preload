@@ -1,8 +1,10 @@
 # 📷 Image Preload
-An Image preloader / Lazy loader plugin to improve page load times. 
-Images will be loaded just before they're in the viewport. This uses [`Intersection Observerver`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to detect if an element is in the viewport. This is an 'experimental' technique and not yet available in every browser. There's an official polyfill available which you can load by going to `tools->Image Preload Settings` in the WP Admin menu. 
+A WordPress Image Preload / LazyLoading plugin to improve page-load times and decrease bandwith usage on first call of the page. 
+Images will be loaded just before they're in the viewport. This plugin makes use of the [`Intersection Observerver API`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to detect if an element is in the viewport. This is an 'experimental' technique and not yet available in every browser. There's an official polyfill available which you can load by going to `tools->Image Preload Settings` in the WP Admin menu. Other than that, the Intersection Observer API has no dependencies whatsoever. Feel free to delete that `$jquery`.
 
-The preloading will replace both `src` and `srcset` with `data-src` and `data-srcset` respectively. `src` will be replaced with a 1px gif. When an element is about to scroll into the viewport these are switched back again. 
+The preloading will replace both `src` and `srcset` with `data-src` and `data-srcset` respectively. `src` will be replaced with a 1px gif as placeholder. When an element is about to scroll into the viewport the `data` and normal attributes are switched back. 
+
+Each image is acoompanied by a `<noscript>` version so your site will still show images when Javascript is disabled.
 
 ## 👷🏼‍Installation
 Download the `.zip` file. Install. That's it. No configuration yet. 

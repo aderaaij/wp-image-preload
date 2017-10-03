@@ -10,7 +10,6 @@
  *
  * License: GPL2
  */
-
 if ( ! class_exists( 'Image_Preload' ) ) :
 
 class Image_Preload {
@@ -39,6 +38,9 @@ class Image_Preload {
 
 	static function add_scripts() {
 		wp_enqueue_script( 'image-preload',  self::get_url( 'assets/js/preload.js' ), self::version, true );
+		if ( get_option( 'load_polyfill' ) == 1 ) {
+			wp_enqueue_script( 'intersection-polyfill',  self::get_url( 'assets/js/intersection-observer.js' ), self::version, true );
+		}
 	}
 
 	static function add_image_placeholders( $content ) {
@@ -52,7 +54,6 @@ class Image_Preload {
 		// Don't lazy-load if the content has already been run through previously
 		if ( false !== strpos( $content, 'data-src' ) )
 			return $content;
-
 		// This is a pretty simple regex, but it works
 		$content = preg_replace_callback( '#<(img)([^>]+?)(>(.*?)</\\1>|[\/]?>)#si', array( __CLASS__, 'process_image' ), $content );
 
@@ -110,9 +111,7 @@ function lazyload_images_add_placeholders( $content ) {
 
 add_action( 'init', array( 'Image_Preload', 'init' ) );
 
-endif;
-?>
-
+endif; ?>
 <?php
 // create custom plugin settings menu
 add_action('admin_menu', 'wp_image_preload_menu');
@@ -120,7 +119,7 @@ add_action('admin_menu', 'wp_image_preload_menu');
 function wp_image_preload_menu() {
 
 	//create new top-level menu
-	add_management_page('WP Image Preload settings', 'Image Preload settings', 'administrator', __FILE__, 'wp_image_preload_settings' , plugins_url('/images/icon.png', __FILE__) );
+	add_management_page('WP Image Preload settings', 'Image Preload settings', 'administrator', __FILE__, 'wp_image_preload_settings' );
 
 	//call register settings function
 	add_action( 'admin_init', 'register_wp_image_preload_settings' );
@@ -129,22 +128,30 @@ function wp_image_preload_menu() {
 
 function register_wp_image_preload_settings() {
 	//register our settings
-	register_setting( 'my-cool-plugin-settings-group', 'new_option_name' );
-	register_setting( 'my-cool-plugin-settings-group', 'some_other_option' );
-	register_setting( 'my-cool-plugin-settings-group', 'option_etc' );
+	register_setting( 'wp-image-preload-settings-group', 'load_polyfill' );
+	// register_setting( 'wp-image-preload-settings-group', 'some_other_option' );
+	// register_setting( 'wp-image-preload-settings-group', 'option_etc' );
 }
 
-function wp_image_preload_settings() {
-?>
+function wp_image_preload_settings() { ?>
 
 <div class="wrap">
-<h1>Your Plugin Name</h1>
+<h1>WP Image Preload</h1>
 
 <form method="post" action="options.php">
-    <?php settings_fields( 'my-cool-plugin-settings-group' ); ?>
-    <?php do_settings_sections( 'my-cool-plugin-settings-group' ); ?>
+    <?php settings_fields( 'wp-image-preload-settings-group' ); ?>
+    <?php do_settings_sections( 'wp-image-preload-settings-group' ); ?>
     <table class="form-table">
         <tr valign="top">
+			<th scope="row">Load Polyfill?</th>
+			<td>
+				<input name="load_polyfill" type="radio" value="1" <?php checked( '1', get_option( 'load_polyfill' ) ); ?> />
+				<label>Yes</label><br/>
+				<input name="load_polyfill" type="radio" value="0" <?php checked( '0', get_option( 'load_polyfill' ) ); ?> />
+				<label>No</label>
+			</td>
+        </tr>
+        <!-- <tr valign="top">
         <th scope="row">New Option Name</th>
         <td><input type="text" name="new_option_name" value="<?php echo esc_attr( get_option('new_option_name') ); ?>" /></td>
         </tr>
@@ -157,11 +164,9 @@ function wp_image_preload_settings() {
         <tr valign="top">
         <th scope="row">Options, Etc.</th>
         <td><input type="text" name="option_etc" value="<?php echo esc_attr( get_option('option_etc') ); ?>" /></td>
-        </tr>
-    </table>
-    
+        </tr> -->
+    </table>    
     <?php submit_button(); ?>
-
 </form>
 </div>
 <?php } ?>

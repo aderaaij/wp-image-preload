@@ -4,7 +4,7 @@ Images will be loaded just before they're in the viewport. This uses [`Intersect
 
 The preloading will replace both `src` and `srcset` with `data-src` and `data-srcset` respectively. `src` will be replaced with a 1px gif. When an element is about to scroll into the viewport these are switched back again. 
 
-## 👷🏼‍♀️Installation
+## 👷🏼‍Installation
 Download the `.zip` file. Install. That's it. No configuration yet. 
 
 ## 💅🏼 Styling / Animation

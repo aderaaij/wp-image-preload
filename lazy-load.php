@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Image preload
+ * Plugin Name: WP Image Preload
  * Description: An image preloader / lazy-load plugin for content images, thumbnails and avatars. Improves load-times and bandwith usage.  
  * Version: 0.1
  * Text Domain: preload
@@ -129,8 +129,6 @@ function wp_image_preload_menu() {
 function register_wp_image_preload_settings() {
 	//register our settings
 	register_setting( 'wp-image-preload-settings-group', 'load_polyfill' );
-	// register_setting( 'wp-image-preload-settings-group', 'some_other_option' );
-	// register_setting( 'wp-image-preload-settings-group', 'option_etc' );
 }
 
 function wp_image_preload_settings() { ?>
@@ -151,20 +149,6 @@ function wp_image_preload_settings() { ?>
 				<label>No</label>
 			</td>
         </tr>
-        <!-- <tr valign="top">
-        <th scope="row">New Option Name</th>
-        <td><input type="text" name="new_option_name" value="<?php echo esc_attr( get_option('new_option_name') ); ?>" /></td>
-        </tr>
-         
-        <tr valign="top">
-        <th scope="row">Some Other Option</th>
-        <td><input type="text" name="some_other_option" value="<?php echo esc_attr( get_option('some_other_option') ); ?>" /></td>
-        </tr>
-        
-        <tr valign="top">
-        <th scope="row">Options, Etc.</th>
-        <td><input type="text" name="option_etc" value="<?php echo esc_attr( get_option('option_etc') ); ?>" /></td>
-        </tr> -->
     </table>    
     <?php submit_button(); ?>
 </form>

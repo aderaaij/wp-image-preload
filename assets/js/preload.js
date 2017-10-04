@@ -65,7 +65,6 @@ function preLoad(selector = 'img[data-src]', options = {}) {
     };
 }
 
-// console.log('bla');
 document.addEventListener('DOMContentLoaded', () => {
     const observer = preLoad('img[data-src]', {
         threshold: 0.1,

@@ -37,7 +37,7 @@ class Image_Preload {
 	}
 
 	static function add_scripts() {
-		wp_enqueue_script( 'image-preload',  self::get_url( 'assets/js/preload.js' ), self::version, true );
+		wp_enqueue_script( 'image-preload',  self::get_url( 'assets/js/preload-transpiled.js' ), self::version, true );
 		if ( get_option( 'load_polyfill' ) == 1 ) {
 			wp_enqueue_script( 'intersection-polyfill',  self::get_url( 'assets/js/intersection-observer.js' ), self::version, true );
 		}

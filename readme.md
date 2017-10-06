@@ -1,4 +1,5 @@
 # 📷 Image Preload
+** Warning: This plugin is not yet production ready and contains a bug with srcset that makes images download twice. To be fixed soon **
 A WordPress Image Preload / LazyLoading plugin to improve page-load times and decrease bandwith usage on first call of the page. 
 Images will be loaded just before they're in the viewport. This plugin makes use of the [`Intersection Observerver API`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to detect if an element is in the viewport. This is an 'experimental' technique and not yet available in every browser. There's an official polyfill available which you can load by going to `tools->Image Preload Settings` in the WP Admin menu. Other than that, the Intersection Observer API has no dependencies whatsoever. Feel free to delete that `$jquery`.
 

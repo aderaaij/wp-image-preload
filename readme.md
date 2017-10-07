@@ -1,6 +1,6 @@
 # 📷 WordPress Image Preload
 
-This is a WordPress 'Lazy Loading' / image preloading plugin to imrpove the page-load times of your site and decrease bandwith usage on the first call of your post pages. 
+This is a WordPress 'Lazy Loading' / image preloading plugin to improve the page-load times of your site and decrease bandwith usage on the first call of your post pages. 
 
 This plugin makes use of the incredible performant [`Intersection Observerver API`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to detect if an element is in (or near) the viewport. This is an 'experimental' technique which is not available in every browser yet, but there's an official polyfill available which you can load by going to `tools -> Image Preload Settings` in the WP Admin menu.
 

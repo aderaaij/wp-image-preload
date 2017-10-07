@@ -26,7 +26,7 @@ img[data-loaded=true] {
 }
 ```
 
-## Develop / Build
+## 👩‍💻 Develop / Build
 To develop or build the plugin, do a `yarn install` in the root. The following scripts are included:
 * `dev`: Transpiles the scrips
 * `build`: Transpiles and minifies scripts

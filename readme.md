@@ -42,8 +42,8 @@ The lazyloading script is an adaption of [Lozad.js](https://github.com/ApoorvSax
 I have no idea. GPL v2? MIT? What's the standard if you include GPL and MIT software in your release? Feel free to make a pull request on the subject (or anything else)
 
 ## 👩‍🏭 TODO
-* Add option to add custom classes before and after load
-* Add option to customise the offset
+* Add option to add custom classes before and after load in WP Admin
+* Add option to customise the offset in WP Admin
 * fix license
 
 

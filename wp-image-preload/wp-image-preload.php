@@ -20,7 +20,7 @@ if ( ! class_exists( 'Wp_Image_Preload' ) ) :
 
 class Wp_Image_Preload {
 
-	const version = '0.1';
+	const version = '1.0.0';
 	protected static $enabled = true;
 
 	static function init() {

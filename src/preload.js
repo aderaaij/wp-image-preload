@@ -1,3 +1,5 @@
+import pWaitFor from 'p-wait-for';
+
 const defaultConfig = {
     rootMargin: '0px',
     threshold: 0,
@@ -16,11 +18,32 @@ const defaultConfig = {
 };
 
 function markAsLoaded(element) {
-    const imgLoad = new Image();
-    imgLoad.onload = () => {
-        element.dataset.loaded = true;
-    };
-    imgLoad.src = element.dataset.src;
+    if (element.dataset.srcset) {
+        pWaitFor(() => {            
+            if (element.currentSrc !== '' && !element.currentSrc.includes('1x1')) {
+                console.log('passed', element.currentSrc);
+                return true;
+            }
+            return false;
+        }).then(() => {
+            const imgLoad = new Image();
+            imgLoad.onload = () => {
+                element.classList.add('b-loaded');
+                element.parentNode.classList.add('is-loaded');
+                element.dataset.loaded = true;
+            };
+            imgLoad.src = element.currentSrc;
+            console.log(element.currentSrc);
+        });
+    } else {
+        const imgLoad = new Image();
+        imgLoad.onload = () => {
+            element.classList.add('b-loaded');
+            element.parentNode.classList.add('is-loaded');
+            element.dataset.loaded = true;
+        };
+        imgLoad.src = element.dataset.src;
+    }
 }
 
 const isLoaded = element => element.dataset.loaded === 'true';
@@ -49,7 +72,6 @@ function preLoad(selector = 'img[data-src]', options = {}) {
     return {
         observe() {
             const elements = document.querySelectorAll(selector);
-            // console.log(elements);
             for (let i = 0; i < elements.length; i++) {
                 if (isLoaded(elements[i])) {
                     continue;
@@ -68,7 +90,7 @@ function preLoad(selector = 'img[data-src]', options = {}) {
 document.addEventListener('DOMContentLoaded', () => {
     const observer = preLoad('img[data-src]', {
         threshold: 0.1,
-        rootMargin: '100%',
+        rootMargin: '0px',
     });
     observer.observe();
 });

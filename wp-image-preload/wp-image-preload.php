@@ -1,18 +1,24 @@
 <?php
 /**
- * Plugin Name: WP Image Preload
- * Description: An image preloader / lazy-load plugin for content images, thumbnails and avatars. Improves load-times and bandwith usage.  
- * Version: 0.1
- * Text Domain: preload
+ * @wordpress-plugin
+ * Plugin Name:       WordPress Image Preload
+ * Plugin URI:        https://github.com/aderaaij/wp-image-preload
+ * Description:       A modern lazyload / image preload plugin based on Intersection Observer. 
+ * Version:           1.0.0
+ * Author:            Arden.nl
+ * Author URI:        https://arden.nl/
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:       wp-image-preload
  *
- * Original Code by the WordPress.com VIP team, TechCrunch 2011 Redesign team, and Jake Goldman (10up LLC).
- * Uses a modified version of Lozad 
+ * Based on LazyLoad: https://nl.wordpress.org/plugins/lazy-load/
+ * Uses a modified version of Lozad: https://github.com/ApoorvSaxena/lozad.js/
  *
- * License: GPL2
  */
-if ( ! class_exists( 'Image_Preload' ) ) :
 
-class Image_Preload {
+if ( ! class_exists( 'Wp_Image_Preload' ) ) :
+
+class Wp_Image_Preload {
 
 	const version = '0.1';
 	protected static $enabled = true;
@@ -37,17 +43,17 @@ class Image_Preload {
 	}
 
 	static function add_scripts() {
-		wp_enqueue_script( 'image-preload',  self::get_url( 'assets/js/preload-transpiled.js' ), self::version, true );
 		if ( get_option( 'load_polyfill' ) == 1 ) {
 			wp_enqueue_script( 'intersection-polyfill',  self::get_url( 'assets/js/intersection-observer.js' ), self::version, true );
 		}
+		wp_enqueue_script( 'image-preload',  self::get_url( 'assets/js/preload.js' ), self::version, true );
 	}
 
 	static function add_image_placeholders( $content ) {
 		if ( ! self::is_enabled() )
 			return $content;
 
-		// Don't lazyload for feeds, previews, mobile
+		// Don't lazyload for feeds, previews
 		if( is_feed() || is_preview() )
 			return $content;
 
@@ -80,7 +86,7 @@ class Image_Preload {
 
 		$new_attributes_str = self::build_attributes_string( $new_attributes );
 
-		return sprintf( '<img src="%1$s" data-src="%2$s" data-srcet="%3$s" %4$s><noscript>%5$s</noscript>', esc_url( $placeholder_image ), esc_url( $image_src ), $image_srcset, $new_attributes_str, $matches[0] );
+		return sprintf( '<img src="%1$s" data-src="%2$s" data-srcset="%3$s" %4$s><noscript>%5$s</noscript>', esc_url( $placeholder_image ), esc_url( $image_src ), $image_srcset, $new_attributes_str, $matches[0] );
 	}
 
 	private static function build_attributes_string( $attributes ) {
@@ -106,10 +112,10 @@ class Image_Preload {
 }
 
 function lazyload_images_add_placeholders( $content ) {
-	return Image_Preload::add_image_placeholders( $content );
+	return Wp_Image_Preload::add_image_placeholders( $content );
 }
 
-add_action( 'init', array( 'Image_Preload', 'init' ) );
+add_action( 'init', array( 'Wp_Image_Preload', 'init' ) );
 
 endif; ?>
 <?php

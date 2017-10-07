@@ -19,9 +19,12 @@ const defaultConfig = {
 
 function markAsLoaded(element) {
     if (element.dataset.srcset) {
-        pWaitFor(() => {            
+        /*
+         * When srcset is available we don't know which image the browser will load
+         * so we poll for element.currentSrc to be available before loading the image
+         */
+        pWaitFor(() => {
             if (element.currentSrc !== '' && !element.currentSrc.includes('1x1')) {
-                console.log('passed', element.currentSrc);
                 return true;
             }
             return false;
@@ -33,7 +36,6 @@ function markAsLoaded(element) {
                 element.dataset.loaded = true;
             };
             imgLoad.src = element.currentSrc;
-            console.log(element.currentSrc);
         });
     } else {
         const imgLoad = new Image();
